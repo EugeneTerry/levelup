@@ -6,4 +6,4 @@ class Events(models.Model):
     title = models.CharField(max_length=50)
     date = models.DateTimeField()
     game = models.CharField(max_length=50)
-    event_creator = models.OneToOneField(Gamer, on_delete=models.CASCADE)
+    creator = models.ManyToOneRel(Gamer, related_name = 'events_created')
