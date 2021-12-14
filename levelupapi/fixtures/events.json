@@ -1,0 +1,22 @@
+[
+  {
+    "model": "levelupapi.events",
+    "pk": 1,
+    "fields": {
+      "title":"Lets Do the Dungeon!!!",
+      "date":"2020-08-28T14:51:39.989Z",
+      "game": 2,
+      "creator": 1
+    }
+  },
+  {
+    "model": "levelupapi.events",
+    "pk": 2,
+    "fields": {
+      "title":"Get Rich Or Die Trying",
+      "date":"2020-10-28T14:51:39.989Z",
+      "game": 1,
+      "creator": 1
+    }
+  }
+]
