@@ -10,3 +10,4 @@ class Events(models.Model):
         on_delete=models.SET_DEFAULT, default=1)
     creator = models.ForeignKey(Gamer,
         on_delete=models.SET_DEFAULT, default=1)
+    attendees = models.ManyToManyField(Gamer, related_name="MyEvents")
