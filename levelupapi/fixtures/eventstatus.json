@@ -1,0 +1,23 @@
+[
+  {
+    "model": "levelupapi.eventstatus",
+    "pk": 1,
+    "fields": {
+      "eventstatus": "OPEN"
+    }
+  },
+  {
+    "model": "levelupapi.eventstatus",
+    "pk": 2,
+    "fields": {
+      "eventstatus": "ACTIVE"
+    }
+  },
+  {
+    "model": "levelupapi.eventstatus",
+    "pk": 3,
+    "fields": {
+      "eventstatus": "CLOSED"
+    }
+  }
+]
