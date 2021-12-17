@@ -1,20 +1,38 @@
 [
   {
     "model": "levelupapi.games",
-    "pk": 1,
+    "pk": 4,
     "fields": {
-      "name": "Monopoly",
+      "name": "Welcome To",
+      "maker": "Benoit Turpin",
+      "game_creator": 1,
       "gametype": 1,
-      "game_creator": 1
+      "number_of_players": 4,
+      "skill_level": 3
     }
   },
   {
     "model": "levelupapi.games",
-    "pk": 2,
+    "pk": 5,
     "fields": {
-      "name": "D&D",
+      "name": "Settlers of Catan",
+      "maker": "Klaus Teuber",
+      "game_creator": 1,
+      "gametype": 1,
+      "number_of_players": 4,
+      "skill_level": 4
+    }
+  },
+  {
+    "model": "levelupapi.games",
+    "pk": 6,
+    "fields": {
+      "name": "Dungeons & Dragons",
+      "maker": "Wizards of the Coast",
+      "game_creator": 1,
       "gametype": 2,
-      "game_creator": 1
+      "number_of_players": 5,
+      "skill_level": 3
     }
   }
 ]
