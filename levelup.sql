@@ -4,15 +4,15 @@ SELECT * FROM auth_user;
 
 SELECT * FROM authtoken_token;
 
-SELECT * FROM levelupapi_gamer;
+SELECT * FROM levelupapi_games;
 
 SELECT * FROM 
 
 SELECT g.id,
     g.gametype_id,
-    g.title,
+    g.name,
     g.maker,
-    g.gamer_id,
+    g.game_creator_id,
     g.number_of_players,
     g.skill_level
 FROM levelupapi_games g
