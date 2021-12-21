@@ -34,5 +34,29 @@
       "number_of_players": 5,
       "skill_level": 3
     }
+  },
+  {
+    "model": "levelupapi.games",
+    "pk": 1,
+    "fields":{
+    "name": "Monopoly",
+    "maker": "Hasbro",
+    "game_creator": 1,
+    "number_of_players": 1,
+    "skill_level": 1,
+    "gametype":1
+    }
+  },
+  {
+    "model": "levelupapi.games",
+    "pk": 2,
+    "fields":{
+    "name": "D&D",
+    "maker": "Mattel",
+    "game_creator": 2,
+    "number_of_players": 8,
+    "skill_level": 2,
+    "gametype":2
+    }
   }
 ]
