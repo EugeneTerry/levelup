@@ -7,7 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from levelupapi.models import Game, Event, Gamer
+from levelupapi.models import Games, Events, Gamer
 from levelupapi.views.game import GameSerializer
 
 
@@ -22,13 +22,13 @@ class EventView(ViewSet):
         """
         gamer = Gamer.objects.get(user=request.auth.user)
 
-        event = Event()
+        event = Events()
         event.time = request.data["time"]
         event.date = request.data["date"]
         event.title = request.data["title"]
         event.creator = gamer
 
-        game = Game.objects.get(pk=request.data["gameId"])
+        game = Games.objects.get(pk=request.data["gameId"])
         event.game = game
 
         try:
@@ -45,10 +45,10 @@ class EventView(ViewSet):
             Response -- JSON serialized game instance
         """
         try:
-            event = Event.objects.get(pk=pk)
+            event = Events.objects.get(pk=pk)
             serializer = EventSerializer(event, context={'request': request})
             return Response(serializer.data)
-        except Exception:
+        except Exception as ex:
             return HttpResponseServerError(ex)
 
     def update(self, request, pk=None):
@@ -59,13 +59,13 @@ class EventView(ViewSet):
         """
         gamer = Gamer.objects.get(user=request.auth.user)
 
-        event = Event.objects.get(pk=pk)
+        event = Events.objects.get(pk=pk)
         event.title = request.data["title"]
         event.date = request.data["date"]
         event.time = request.data["time"]
         event.creator = gamer
 
-        game = Game.objects.get(pk=request.data["gameId"])
+        game = Games.objects.get(pk=request.data["gameId"])
         event.game = game
         event.save()
 
@@ -78,12 +78,12 @@ class EventView(ViewSet):
             Response -- 200, 404, or 500 status code
         """
         try:
-            event = Event.objects.get(pk=pk)
+            event = Events.objects.get(pk=pk)
             event.delete()
 
             return Response({}, status=status.HTTP_204_NO_CONTENT)
 
-        except Event.DoesNotExist as ex:
+        except Events.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
         except Exception as ex:
@@ -95,7 +95,7 @@ class EventView(ViewSet):
         Returns:
             Response -- JSON serialized list of events
         """
-        events = Event.objects.all()
+        events = Events.objects.all()
 
         # Support filtering events by game
         game = self.request.query_params.get('gameId', None)
@@ -105,34 +105,28 @@ class EventView(ViewSet):
         serializer = EventSerializer(
             events, many=True, context={'request': request})
         return Response(serializer.data)
-      
+class EventUserSerializer(serializers.ModelSerializer):
+    """JSON serializer for event organizer's related Django user"""
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+class EventGamerSerializer(serializers.ModelSerializer):
+    """JSON serializer for event organizer"""
+    user = EventUserSerializer(many=False)
+    class Meta:
+        model = Gamer
+        fields = ['user']
+class GameSerializer(serializers.ModelSerializer):
+    """JSON serializer for games"""
+    class Meta:
+        model = Games
+        fields = ('id', 'name', 'maker', 'number_of_players', 'skill_level')
 class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for events"""
     creator = EventGamerSerializer(many=False)
     game = GameSerializer(many=False)
 
     class Meta:
-        model = Event
+        model = Events
         fields = ('id', 'game', 'creator',
                   'title', 'date', 'time')
-
-class EventUserSerializer(serializers.ModelSerializer):
-    """JSON serializer for event organizer's related Django user"""
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email']
-
-
-class EventGamerSerializer(serializers.ModelSerializer):
-    """JSON serializer for event organizer"""
-    user = EventUserSerializer(many=False)
-
-    class Meta:
-        model = Gamer
-        fields = ['user']
-
-class GameSerializer(serializers.ModelSerializer):
-    """JSON serializer for games"""
-    class Meta:
-        model = Game
-        fields = ('id', 'name', 'maker', 'number_of_players', 'skill_level')
