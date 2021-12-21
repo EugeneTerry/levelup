@@ -6,7 +6,8 @@
       "title":"Lets Do the Dungeon!!!",
       "date":"2020-08-28T14:51:39.989Z",
       "game": 2,
-      "creator": 1
+      "creator": 1,
+      "time": "12:00"
     }
   },
   {
@@ -16,7 +17,42 @@
       "title":"Get Rich Or Die Trying",
       "date":"2020-10-28T14:51:39.989Z",
       "game": 1,
-      "creator": 1
+      "creator": 1,
+      "time": "13:00"
+    }
+  },
+  {
+    "model": "levelupapi.events",
+    "pk": 4,
+    "fields": {
+      "creator": 1,
+      "title": "Welcome To at lunch",
+      "game": 1,
+      "date": "2021-10-04",
+      "time": "19:00"
+    }
+  },
+  {
+    "model": "levelupapi.events",
+    "pk": 5,
+    "fields": {
+      "creator": 1,
+      "title": "Friday night Settlers and drinks",
+      "game": 2,
+      "date": "2021-08-14",
+      "time": "17:30"
+    }
+  },
+  {
+    "model": "levelupapi.events",
+    "pk": 3,
+    "fields": {
+      "creator": 1,
+      "title": "Vale of the Frost King campaign. All weekend.",
+      "game": 4,
+      "date": "2021-04-20",
+      "time": "12:00"
     }
   }
+
 ]
