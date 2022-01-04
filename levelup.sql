@@ -1,4 +1,4 @@
-SELECT * FROM levelupapi_gametype;
+SELECT * FROM levelupapi_games;
 
 SELECT * FROM auth_user;
 
