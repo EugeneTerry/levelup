@@ -28,7 +28,7 @@ class EventView(ViewSet):
         event.title = request.data["title"]
         event.creator = gamer
 
-        game = Games.objects.get(pk=request.data["gameId"])
+        game = Games.objects.get(pk=request.data["game_id"])
         event.game = game
 
         try:
@@ -65,14 +65,14 @@ class EventView(ViewSet):
         event.time = request.data["time"]
         event.creator = gamer
 
-        game = Games.objects.get(pk=request.data["gameId"])
+        game = Games.objects.get(pk=request.data["game_id"])
         event.game = game
         event.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def destroy(self, request, pk=None):
-        """Handle DELETE requests for a single game
+        """Handle DELETE requests for a single event
 
         Returns:
             Response -- 200, 404, or 500 status code
