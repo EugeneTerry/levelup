@@ -8,8 +8,8 @@ from levelupapi.models import eventstatus
 class Events(models.Model):
   
     title = models.CharField(max_length=50)
-    date = models.DateTimeField(auto_now_add=True)
-    time = models.TimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=False)
+    time = models.TimeField(auto_now_add=False)
     game = models.ForeignKey(Games,
         on_delete=models.SET_DEFAULT, default=1)
     creator = models.ForeignKey(Gamer,
