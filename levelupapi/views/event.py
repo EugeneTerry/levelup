@@ -2,6 +2,8 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError
+from django.utils.timezone import make_aware
+from datetime import datetime
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
@@ -24,7 +26,9 @@ class EventView(ViewSet):
 
         event = Events()
         event.time = request.data["time"]
-        event.date = request.data["date"]
+        date = datetime.strptime(request.data["date"],'%Y-%m-%d')
+        event.date=make_aware(date)
+        
         event.title = request.data["title"]
         event.creator = gamer
 

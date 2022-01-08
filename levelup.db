@@ -4,3 +4,6 @@ From levelupapi_events
 delete
 From levelupapi_events
 where id > 9
+
+select*
+From levelupapi_games
