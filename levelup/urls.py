@@ -20,6 +20,7 @@ from django.conf.urls import include
 from django.urls import path
 from levelupapi.views import register_user, login_user
 from levelupapi.views.event import EventView
+from levelupapi.views.gamer import get_gamer_profile
 
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -31,5 +32,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('register', register_user),
     path('login', login_user),
+    path('profile', get_gamer_profile),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
 ]
