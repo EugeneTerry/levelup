@@ -1,1 +1,1 @@
-SELECT * FROM levelupapi_users
+SELECT * FROM levelupapi_gamer

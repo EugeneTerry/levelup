@@ -1,5 +1,5 @@
 select*
-From levelupapi_events
+From levelupapi_events_attendees
 
 delete
 From levelupapi_events
