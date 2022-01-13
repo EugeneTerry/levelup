@@ -2,11 +2,11 @@ select*
 From levelupapi_events_attendees
 
 delete
-From levelupapi_events
-where id = 24
+From levelupapi_events_attendees
+where id > 4 
 
 select*
-From levelupapi_games
+From levelupapi_events
 
 update levelupapi_games
 set name = 'Welcome To Las Vegas'

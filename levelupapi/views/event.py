@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError
 from django.utils.timezone import make_aware
-from datetime import datetime
+from datetime import datetime, timedelta
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
@@ -26,7 +26,8 @@ class EventView(ViewSet):
 
         event = Events()
         event.time = request.data["time"]
-        date = datetime.strptime(request.data["date"],'%Y-%m-%d')
+        date_in = datetime.strptime(request.data["date"],'%Y-%m-%d')
+        date = date_in + timedelta(days=1)
         event.date=make_aware(date)
         
         event.title = request.data["title"]
