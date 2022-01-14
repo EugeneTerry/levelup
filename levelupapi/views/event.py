@@ -1,9 +1,10 @@
 """View module for handling requests about events"""
+from sqlite3 import Time
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError
 from django.utils.timezone import make_aware
-from datetime import datetime, timedelta
+from datetime import datetime, time
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
@@ -25,9 +26,12 @@ class EventView(ViewSet):
         gamer = Gamer.objects.get(user=request.auth.user)
 
         event = Events()
+        
+        # time = datetime.strptime(request.data["time"],'%I:%M')
+        # event.date=make_aware(time.strftime("%I:%M"))
+        
         event.time = request.data["time"]
-        date_in = datetime.strptime(request.data["date"],'%Y-%m-%d')
-        date = date_in + timedelta(days=1)
+        date = datetime.strptime(request.data["date"],'%Y-%m-%d')
         event.date=make_aware(date)
         
         event.title = request.data["title"]
