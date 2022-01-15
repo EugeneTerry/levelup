@@ -8,6 +8,7 @@ from levelupapi.models import eventstatus
 class Events(models.Model):
   
     title = models.CharField(max_length=50, default = "Unnamed Event")
+    description = models.CharField(max_length=500, default = "No Description Given")
     date = models.DateTimeField(auto_now_add=False)
     time = models.TimeField(auto_now_add=False)
     game = models.ForeignKey(Games,

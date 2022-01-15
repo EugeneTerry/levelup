@@ -2,8 +2,8 @@ select*
 From levelupapi_events_attendees
 
 delete
-From levelupapi_events
-where id > 37 
+From levelupapi_events_attendees
+where id < 9 
 
 select*
 From levelupapi_events
