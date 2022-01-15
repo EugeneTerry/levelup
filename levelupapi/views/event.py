@@ -27,12 +27,11 @@ class EventView(ViewSet):
 
         event = Events()
         
-        # time = datetime.strptime(request.data["time"],'%I:%M')
-        # event.date=make_aware(time.strftime("%I:%M"))
-        
-        event.time = request.data["time"]
-        date = datetime.strptime(request.data["date"],'%Y-%m-%d')
-        event.date=make_aware(date)
+        time = datetime.strptime(request.data["time"],'%H:%M')
+        event.time = time.time()
+                
+        # event.time = request.data["time"]
+        event.date = make_aware(datetime.strptime(request.data["date"],'%Y-%m-%d'))
         
         event.title = request.data["title"]
         event.creator = gamer
