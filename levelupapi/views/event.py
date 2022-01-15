@@ -103,7 +103,14 @@ class EventView(ViewSet):
         Returns:
             Response -- JSON serialized list of events
         """
+        # Get the current authenticated user
+        gamer = Gamer.objects.get(user=request.auth.user)
         events = Events.objects.all()
+        
+        # Set the `joined` property on every event
+        for event in events:
+            # Check to see if the gamer is in the attendees list on the event
+            event.joined = gamer in event.attendees.all()
 
         # Support filtering events by game
         game = self.request.query_params.get('gameId', None)
@@ -174,7 +181,7 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
         fields = ('id', 'game', 'creator',
-                  'title', 'date', 'time')
+                  'title', 'date', 'time', 'attendees', 'joined')
 
 # adding a join button to the events
         
