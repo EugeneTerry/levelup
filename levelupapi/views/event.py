@@ -35,7 +35,7 @@ class EventView(ViewSet):
         
         event.title = request.data["title"]
         event.creator = gamer
-
+        event.description = request.data["description"]
         game = Games.objects.get(pk=request.data["game_id"])
         event.game = game
 
@@ -69,6 +69,7 @@ class EventView(ViewSet):
 
         event = Events.objects.get(pk=pk)
         event.title = request.data["title"]
+        event.description = request.data["description"]
         event.date = request.data["date"]
         event.time = request.data["time"]
         event.creator = gamer
@@ -180,7 +181,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Events
-        fields = ('id', 'game', 'creator',
+        fields = ('id', 'game', 'creator', 'description',
                   'title', 'date', 'time', 'attendees', 'joined')
 
 # adding a join button to the events
