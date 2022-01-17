@@ -13,6 +13,7 @@ def get_gamer_profile(request):
 
 class GameSerializer(serializers.ModelSerializer):
     
+    attending = EventSerializer(many = True)
     class Meta:
       model = Gamer
       fields = ('id', 'bio', 'attending')
