@@ -1,10 +1,9 @@
 """View module for handling requests about events"""
-from sqlite3 import Time
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError
 from django.utils.timezone import make_aware
-from datetime import datetime, time
+from datetime import datetime
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
@@ -26,13 +25,14 @@ class EventView(ViewSet):
         gamer = Gamer.objects.get(user=request.auth.user)
 
         event = Events()
-        
-        time = datetime.strptime(request.data["time"],'%H:%M')
+
+        time = datetime.strptime(request.data["time"], '%H:%M')
         event.time = time.time()
-                
+
         # event.time = request.data["time"]
-        event.date = make_aware(datetime.strptime(request.data["date"],'%Y-%m-%d'))
-        
+        event.date = make_aware(datetime.strptime(
+            request.data["date"], '%Y-%m-%d'))
+
         event.title = request.data["title"]
         event.creator = gamer
         event.description = request.data["description"]
@@ -107,7 +107,7 @@ class EventView(ViewSet):
         # Get the current authenticated user
         gamer = Gamer.objects.get(user=request.auth.user)
         events = Events.objects.all()
-        
+
         # Set the `joined` property on every event
         for event in events:
             # Check to see if the gamer is in the attendees list on the event
@@ -121,7 +121,7 @@ class EventView(ViewSet):
         serializer = EventSerializer(
             events, many=True, context={'request': request})
         return Response(serializer.data)
-    
+
     @action(methods=['post', 'delete'], detail=True)
     def signup(self, request, pk=None):
         """Managing gamers signing up for events"""
@@ -158,22 +158,31 @@ class EventView(ViewSet):
                 return Response(None, status=status.HTTP_204_NO_CONTENT)
             except Exception as ex:
                 return Response({'message': ex.args[0]})
+
+
 class EventUserSerializer(serializers.ModelSerializer):
     """JSON serializer for event organizer's related Django user"""
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
+
+
 class EventGamerSerializer(serializers.ModelSerializer):
     """JSON serializer for event organizer"""
     user = EventUserSerializer(many=False)
+
     class Meta:
         model = Gamer
         fields = ['user']
+
+
 class GameSerializer(serializers.ModelSerializer):
     """JSON serializer for games"""
     class Meta:
         model = Games
         fields = ('id', 'name', 'maker', 'number_of_players', 'skill_level')
+
+
 class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for events"""
     creator = EventGamerSerializer(many=False)
@@ -185,5 +194,3 @@ class EventSerializer(serializers.ModelSerializer):
                   'title', 'date', 'time', 'attendees', 'joined')
 
 # adding a join button to the events
-        
-    
