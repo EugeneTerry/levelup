@@ -10,6 +10,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from levelupapi.models import Games, Events, Gamer
+from levelupapi.views.eventstatus import EventStatusSerializer
 from levelupapi.views.game import GameSerializer
 
 
@@ -187,6 +188,7 @@ class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for events"""
     creator = EventGamerSerializer(many=False)
     game = GameSerializer(many=False)
+    # eventstatus = EventStatusSerializer(many=True)
 
     class Meta:
         model = Events

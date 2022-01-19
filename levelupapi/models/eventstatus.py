@@ -1,3 +1,4 @@
+from cProfile import label
 from django.db import models
 class EventStatus(models.Model):
-  eventstatus = models.CharField(max_length=50)
+  label = models.CharField(max_length=50)
