@@ -84,7 +84,7 @@ class GameView(ViewSet):
         # creating a new instance of Game, get the game record
         # from the database whose primary key is `pk`
         game = Games.objects.get(pk=pk)
-        game.title = request.data["title"]
+        game.name = request.data["name"]
         game.maker = request.data["maker"]
         game.number_of_players = request.data["numberOfPlayers"]
         game.skill_level = request.data["skillLevel"]
