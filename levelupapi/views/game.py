@@ -1,4 +1,5 @@
 """View module for handling requests about games"""
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from rest_framework import status
 from django.http import HttpResponseServerError
@@ -137,13 +138,22 @@ class GameView(ViewSet):
             games, many=True, context={'request': request})
         return Response(serializer.data)
       
-class GameSerializer(serializers.ModelSerializer):
-    """JSON serializer for games
+class GameUserSerializer(serializers.ModelSerializer):
+    """JSON serializer for event organizer's related Django user"""
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+class GameGamerSerializer(serializers.ModelSerializer):
+    """JSON serializer for event organizer"""
+    user = GameUserSerializer(many=False)
 
-    Arguments:
-        serializer type
-    """
+    class Meta:
+        model = Gamer
+        fields = ['user']
+class GameSerializer(serializers.ModelSerializer):
+    """JSON serializer for games"""
+    game_creator = GameGamerSerializer(many=False)
     class Meta:
         model = Games
-        fields = ('id', 'name', 'maker', 'number_of_players', 'skill_level', 'gametype')
+        fields = ('id', 'name', 'maker', 'number_of_players', 'skill_level', 'gametype', 'game_creator')
         depth = 1
