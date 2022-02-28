@@ -56,13 +56,6 @@
             "index": "pypi",
             "version": "==3.11.0"
         },
-        "django.db": {
-            "hashes": [
-                "sha256:8639b6f78f04f34294cb465b308992a84297df41033519efd85b3a6b186b5296"
-            ],
-            "index": "pypi",
-            "version": "==0.0.7"
-        },
         "djangorestframework": {
             "hashes": [
                 "sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee",
