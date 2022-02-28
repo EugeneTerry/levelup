@@ -6,8 +6,10 @@
     {
       "previewLimit": 50,
       "driver": "SQLite",
-      "name": "levelup",
+      "name": "levelupconnect",
       "database": "db.sqlite3"
     }
-  ]
+  ],
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true
 }
